@@ -5,24 +5,31 @@ import Stack from '@mui/material/Stack';
 import IconButton from '@mui/material/IconButton';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { styled } from '@mui/material/styles';
+import { Link } from "react-router-dom";
+
 
 const Input = styled('input')({
     display: 'none',
   });
   
 
+
 export default function Main(){
     return(
         <div className = "main">
 
         <div className = "menu" id = "menu">
-            <Stack spacing={50} direction = "row">
+            <Stack spacing={40} direction = "row">
                <Button size="large" variant="contained">Predict</Button> 
-               <Button size="large" variant="contained">Data</Button> 
+               <Button size="large" variant="contained">
+                   <Link to="/data" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                   Data
+                   </Link>
+                   </Button> 
                </Stack>   
             </div>
 
-        <div className = "left">
+
             <div className = "Image">
 
         <Stack direction="row" alignItems="center" spacing={2}>
@@ -41,7 +48,6 @@ export default function Main(){
 
         </Stack>
 
-        </div>
         </div> 
 
         </div>   

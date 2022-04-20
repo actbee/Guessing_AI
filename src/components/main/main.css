@@ -6,7 +6,7 @@
 }
 
 .menu{
-   width: 100%;
+   width: 100vh;
    height: 20vh;
    display:flex;
    flex-direction: row;
@@ -15,16 +15,20 @@
 }
 
 .left{
-   width: 80vh;
-   height: 80vh;
-   margin: 50px 100px;
+   width: 40vh;
+   height: 80px;
    border-style: solid;
+
 }
 
 .Image{
    height: 100%;
+   width: 50%;
+   margin: 5vh 10vh;
+   border-style: solid;
    display:flex;
    flex-direction: row;
    align-items:center;
    justify-content: center;
 }
+
