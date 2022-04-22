@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useRef, Webcam, Filereader} from "react";
 import "./main.css";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
@@ -14,10 +14,11 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
 
+
 const Input = styled('input')({
     display: 'none',
   });
-  
+
 
 export default function Main(){
 
@@ -51,6 +52,29 @@ export default function Main(){
             setOn3(false);
         }
     }
+
+    const webcamRef = useRef(null);
+
+    const image_state = {
+        file: '',
+        imagePreivewUrl: '',
+    };
+
+    const _handleImageChange = (e) => {
+        e.preventDefault();
+        let reader = new Filereader();
+        let file = e.target.files[0];
+
+        reader.onloadend = () => {
+            image_state.file = file;
+            image_state.imagePreivewUrl = reader.result;
+        }
+
+        reader.readAsDataURL (file);
+
+    }
+
+
      return(
         <div className = "main">
 
@@ -72,17 +96,20 @@ export default function Main(){
 
         <label htmlFor="contained-button-file">
         <Input accept="image/*" id="contained-button-file" multiple type="file" />
-        <Button variant="outlined" component="span"> Upload </Button>
+        <Button variant="outlined" component="span" onChange = {_handleImageChange}> Upload </Button>
         </label>
 
-        <label htmlFor="icon-button-file">
+       
         <Input accept="image/*" id="icon-button-file" type="file" />
         <IconButton color="primary" aria-label="upload picture" component="span">
           <PhotoCamera size="large"/>
         </IconButton>
-        </label>
 
         </Stack>
+        {
+            image_state.imagePreivewUrl &&
+            <img src = {image_state.imagePreivewUrl} />
+        }
 
         </div> 
 
@@ -91,8 +118,8 @@ export default function Main(){
            <div className = "result_container">
                <div className = "result">
                {
-                 result? <CheckIcon sx = {{color: "green", fontSize: 130}}/>
-                 :   <ClearIcon sx = {{color: "red", fontSize: 130}}/> 
+                 result? <CheckIcon sx = {{color: "green", fontSize: 150}}/>
+                 :   <ClearIcon sx = {{color: "red", fontSize: 150}}/> 
                }
                </div>
                <div className = "judge">

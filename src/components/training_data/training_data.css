@@ -30,9 +30,11 @@
  }
  .left_body{
      height: 90%;
+     overflow-y:auto
  }
  .right_body{
      height: 90%;
+     overflow-y:auto
  }
  .add_yes{
      position: relative;

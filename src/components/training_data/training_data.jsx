@@ -13,8 +13,15 @@ const Input = styled('input')({
     display: 'none',
   });
   
+var yes_images = [];
+var no_images = [];
 
 export default function Data(){
+    const importAll = (r) => {
+        return r.keys().map(r);
+    }
+        yes_images = importAll(require.context('../../../public/training_data/yes/', false, /\.(png|jpe?g|svg)$/));
+        no_images = importAll(require.context('../../../public/training_data/no/', false, /\.(png|jpe?g|svg)$/));
     return(
        <div className = 'data'>
            <div className = "menu" id = "menu">
@@ -29,7 +36,11 @@ export default function Data(){
            <div className="images_container">
             <div className = "left">
                 <CheckIcon sx = {{color: "green", fontSize: 50}}/>
-                <div className = "left_body" />
+                <div className = "left_body" >
+                    {
+                        yes_images.map((image, index) => <img width = {150} height = {150} key = {index} src = {image} alt="info"></img>)
+                    }
+                    </div>
                 <div className = "add_yes" >
                 <label htmlFor="icon-button-file">
                 <Input accept="image/*" id="icon-button-file" type="file" />
@@ -41,7 +52,11 @@ export default function Data(){
             </div> 
             <div className = "right">
                 <ClearIcon sx = {{color: "red", fontSize: 50}}/>
-                <div className = "right_body" />
+                <div className = "right_body" >
+                    {
+                        no_images.map((image, index) => <img width = {150} height = {150} key = {index} src = {image} alt="info"></img>)
+                    }
+                    </div>
                 <div className = "add_no" >
                 <label htmlFor="icon-button-file">
                 <Input accept="image/*" id="icon-button-file" type="file" />
