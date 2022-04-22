@@ -31,20 +31,24 @@ export default function Data(){
                 <CheckIcon sx = {{color: "green", fontSize: 50}}/>
                 <div className = "left_body" />
                 <div className = "add_yes" >
+                <label htmlFor="icon-button-file">
                 <Input accept="image/*" id="icon-button-file" type="file" />
                 <IconButton color="primary" aria-label="upload picture" component="span">
                      <AddCircleIcon sx = {{fontSize: 50}} />
                 </IconButton>
+                </label>
                 </div>
             </div> 
             <div className = "right">
                 <ClearIcon sx = {{color: "red", fontSize: 50}}/>
                 <div className = "right_body" />
                 <div className = "add_no" >
+                <label htmlFor="icon-button-file">
                 <Input accept="image/*" id="icon-button-file" type="file" />
                 <IconButton color="primary" aria-label="upload picture" component="span">
                      <AddCircleIcon sx = {{fontSize: 50}} />
                 </IconButton>
+                </label>
                 </div>
                 </div>  
             </div>            
