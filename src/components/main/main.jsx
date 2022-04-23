@@ -1,4 +1,4 @@
-import {useState, useRef, Webcam, Filereader} from "react";
+import {useState, useRef, Filereader} from "react";
 import "./main.css";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
