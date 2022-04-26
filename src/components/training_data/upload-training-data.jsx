@@ -1,12 +1,22 @@
 import * as React from 'react';
-
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import UploadIcon from '@mui/icons-material/Upload';
 import "./training_data.css";
+import { styled } from '@mui/material/styles';
 import { Button } from "@mui/material"
 import ClearIcon from '@mui/icons-material/Clear';
+import CheckIcon from '@mui/icons-material/Check';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import "./training_data.css";
 
-const UploadTrainingData = ({isPositive}) => {
+
+const Input = styled('input')({
+  display: 'none',
+});
+
+const UploadTrainingData = (props) => {
     // TODO: replace the line below with useRecoilState(...), see notes below for more info
     const [displayedImages, setDisplayedImages] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(false)
@@ -35,10 +45,10 @@ const uploadDocuments = async (files) => {
   
     // Wait for all promises to be resolved
     await Promise.all(filePromises).then((values) => {
-        setDisplayedImages(values);
+        //setDisplayedImages(values);
         
         // Note: If you want to have the images be appended, use something like the following:
-        // setDisplayedImages([...displayedImages, ...values])
+        setDisplayedImages([...displayedImages, ...values])
         
         setIsLoading(false);
         // TODO: use recoil for keeping track of global state, 
@@ -60,11 +70,19 @@ const uploadDocuments = async (files) => {
     return (
     <>
     
-    
-    <Button>
-        <ClearIcon sx = {{color: "red", fontSize: 50}} onClick={() => setDisplayedImages([])}/>
-    </Button>
-                <div className = "right_body" >
+
+
+      {
+        props.isPositive?
+        <CheckIcon  sx = {{color: "green", fontSize: 50} }/> :
+        <ClearIcon  sx = {{color: "red", fontSize: 50}} />
+      }
+
+       <IconButton aria-label="delete"  className = "delete_button" onClick={() => setDisplayedImages([])}>
+          <DeleteIcon sx = {{fontSize: 40 }} />
+       </IconButton>
+
+                <div className = "data_body" >
                     {
                         isLoading ? <center><CircularProgress /></center> : 
                             displayedImages.map(
@@ -74,18 +92,18 @@ const uploadDocuments = async (files) => {
                     </div>
                 {/* TODO: we could make this button more friendly looking, 
                 the commented out button below is pretty solid if you wanna go with that. */}
-                <input
-                accept="image/*"
-                multiple
-                type="file"
-                onChange={updateImages} />
-                <div className = "add_no" >
-               
-                {/* <IconButton color="primary" aria-label="upload picture" component="span">
-                     <AddCircleIcon sx = {{fontSize: 50}} />
-                </IconButton> */} 
+           
+
+                <div className = "add_button" >
+                <Input id = {props.inputid} accept="image/*" multiple type="file" onChange={updateImages} />
+                <label htmlFor={props.inputid}>  
+                 <IconButton color="primary" aria-label="upload picture" component="span">
+                     <UploadIcon sx = {{fontSize: 50}} />
+                </IconButton> 
+                </label>
                 </div>
                 </>)
+
 }
 
 export default UploadTrainingData;
