@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
 // import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import UploadTrainingData from './upload-training-data';
+import Stack from '@mui/material/Stack';
 
 var yes_images = [];
 var no_images = [];
@@ -16,11 +17,16 @@ export default function Data() {
     return(
        <div className = 'data'>
            <div className = "menu" id = "menu">
+           <Stack spacing={20} direction = "row">
                <Button size="large" variant="contained">
                <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                    Back
                    </Link>
-                   </Button>              
+                   </Button>  
+                <Button size="large" variant="contained">
+                    Train
+                </Button>
+            </Stack>
             </div>
 
            <div className="images_container">
