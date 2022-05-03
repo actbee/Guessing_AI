@@ -9,10 +9,6 @@ Open terminal [how to do this on mac](https://setapp.com/how-to/how-to-open-term
 git clone https://github.com/actbee/Guessing_AI.git
 ```
 
-(TODO: if git is not installed, then do ....)
-
-
-
 ## Install dependencies
 
 ```
@@ -31,4 +27,5 @@ The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
 ## PC setup:
-TODO
+Download and install [Git](https://git-scm.com/download/win)
+To open terminal, type "terminal" into the Windows search bar and open the first result
