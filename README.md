@@ -9,11 +9,8 @@ Open terminal [how to do this on mac](https://setapp.com/how-to/how-to-open-term
 git clone https://github.com/actbee/Guessing_AI.git
 ```
 
-if git is not installed, then do:
+(TODO: if git is not installed, then do ....)
 
-...
-
-## PC setup:
 
 
 ## Install dependencies
