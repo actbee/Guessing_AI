@@ -25,7 +25,7 @@ export default function Main(){
     const [result, setOn2] = useState(true);
     const [upclicked, setOn3] = useState(false);
     const [downclicked, setOn4] = useState(false);
-    const [displayedImage, setDisplayedImage] = useState('');
+    const [displayedImage, setDisplayedImage] = useState([]);
   
 
 
@@ -69,8 +69,8 @@ export default function Main(){
        setOn3(false);
        setOn4(false);
        var res = PredictLabel(displayedImage);
-       console.log(res);
-       if( res === "yes"){
+       console.log("ooo",res);
+       if( res === "positive"){
            result_change(true);
        }
        else{

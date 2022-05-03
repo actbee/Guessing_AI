@@ -15,8 +15,8 @@ export default function Data() {
     const no_images = useRecoilValue(displayedImages_no);
 
     const train = () => {
-        TrainNaiveBayes(yes_images, "yes")
-        TrainNaiveBayes(no_images, "no")
+        TrainNaiveBayes(yes_images, 'positive')
+        TrainNaiveBayes(no_images, 'negative')
     }
 
     return(
