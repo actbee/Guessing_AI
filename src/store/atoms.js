@@ -1,12 +1,13 @@
 import {atom} from "recoil";
 
 
-export const displayedImages = atom({
-    key: "displayedImages",
+export const displayedImages_yes = atom({
+    key: "displayedImages_yes",
     default: [],
 })
 
-export const isLoading = atom({
-    key: "isLoading",
-    default: false,
+export const displayedImages_no = atom({
+    key: "displayedImages_no",
+    default: [],
 })
+

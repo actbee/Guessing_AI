@@ -1,6 +1,6 @@
-import { displayedImages, isLoading } from "./atoms";
+import { displayedImages_yes, displayedImages_no } from "./atoms";
 
 export{
-    displayedImages,
-    isLoading
+    displayedImages_yes,
+    displayedImages_no
 }

@@ -10,6 +10,9 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CircularProgress from '@mui/material/CircularProgress';
 import "./training_data.css";
+import { displayedImages_yes, displayedImages_no} from '../../store';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
+
 
 
 const Input = styled('input')({
@@ -18,9 +21,12 @@ const Input = styled('input')({
 
 const UploadTrainingData = (props) => {
     // TODO: replace the line below with useRecoilState(...), see notes below for more info
-    const [displayedImages, setDisplayedImages] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(false)
-
+   // const [displayedImages, setDisplayedImages] = React.useState([]);
+   const [isLoading, setIsLoading] = React.useState(false)
+   const [yes_images, setyesImages] = useRecoilState(displayedImages_yes);
+   const [no_images, setnoImages] = useRecoilState(displayedImages_no);
+   const shownImages = props.isPositive? yes_images: no_images;
+   const setshownImages = props.isPositive? setyesImages: setnoImages;
 
 const uploadDocuments = async (files) => {
     setIsLoading(true);
@@ -48,7 +54,7 @@ const uploadDocuments = async (files) => {
         //setDisplayedImages(values);
         
         // Note: If you want to have the images be appended, use something like the following:
-        setDisplayedImages([...displayedImages, ...values])
+        setshownImages([...shownImages, ...values])
         
         setIsLoading(false);
         // TODO: use recoil for keeping track of global state, 
@@ -78,14 +84,14 @@ const uploadDocuments = async (files) => {
         <ClearIcon  sx = {{color: "red", fontSize: 50}} />
       }
 
-       <IconButton aria-label="delete"  className = "delete_button" onClick={() => setDisplayedImages([])}>
+       <IconButton aria-label="delete"  className = "delete_button" onClick={() => setshownImages([])}>
           <DeleteIcon sx = {{fontSize: 40 }} />
        </IconButton>
 
                 <div className = "data_body" >
                     {
                         isLoading ? <center><CircularProgress /></center> : 
-                            displayedImages.map(
+                            shownImages.map(
                                 (image, index) => 
                                 <img width={150} alt={'user inputted'} src={image} height={150} key={index} />)
                     }

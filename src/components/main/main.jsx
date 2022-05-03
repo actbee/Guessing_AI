@@ -14,6 +14,7 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 
 
+
 const Input = styled('input')({
     display: 'none',
   });
@@ -25,11 +26,11 @@ export default function Main(){
     const [upclicked, setOn3] = useState(false);
     const [downclicked, setOn4] = useState(false);
     const [displayedImages, setDisplayedImages] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+  
 
 
     const uploadDocuments = async (files) => {
-    setIsLoading(true);
+
     const filePromises = files.map((file) => {
       // Return a promise per file
       return new Promise((resolve, reject) => {
@@ -52,7 +53,6 @@ export default function Main(){
     // Wait for all promises to be resolved
     await Promise.all(filePromises).then((values) => {
         setDisplayedImages(values);
-        setIsLoading(false);
     })
 
   };
