@@ -1,14 +1,10 @@
-<script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+import * as ml5 from "ml5";
 // npm install bayes
 var bayes = require('bayes')
-​
 var classifier = bayes()
-​
-const processing_classifier = ml5.imageClassifier("MobileNet", modelLoaded);​
-
-
+const processing_classifier = ml5.imageClassifier("MobileNet");
 // Takes in objects detected in images as one string, and user label
-function trainNaiveBayes(imagearray, userLabel) {
+export function trainNaiveBayes(imagearray, userLabel) {
 	var imageLabels = [];
 	for (var i =0; i<imagearray.length; i++){
 		processing_classifier.predict(imagearray[i], 
@@ -19,9 +15,7 @@ function trainNaiveBayes(imagearray, userLabel) {
 
     classifier.learn(imageLabels, userLabel)
 }
-​
 // Takes in objects in image, outputs user label
-function predictLabel(imageLabels) {
+export function predictLabel(imageLabels) {
     return classifier.categorize(imageLabels)
 }
-​

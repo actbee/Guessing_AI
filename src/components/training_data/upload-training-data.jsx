@@ -76,8 +76,6 @@ const uploadDocuments = async (files) => {
     return (
     <>
     
-
-
       {
         props.isPositive?
         <CheckIcon  sx = {{color: "green", fontSize: 50} }/> :

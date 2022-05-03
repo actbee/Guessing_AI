@@ -4,16 +4,21 @@ import { Link } from "react-router-dom";
 // import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import UploadTrainingData from './upload-training-data';
 import Stack from '@mui/material/Stack';
+import {trainNaiveBayes} from '../naiveBayes/naiveBayes'
+import {useRecoilValue} from 'recoil'
+import { displayedImages_no, displayedImages_yes } from "../../store"
 
-var yes_images = [];
-var no_images = [];
 
 export default function Data() {
-    const importAll = (r) => {
-        return r.keys().map(r);
+
+    const yes_images = useRecoilValue(displayedImages_yes);
+    const no_images = useRecoilValue(displayedImages_no);
+
+    const train = () => {
+        trainNaiveBayes(yes_images, "yes")
+        trainNaiveBayes(no_images, "no")
     }
-        yes_images = importAll(require.context('../../../public/training_data/yes/', false, /\.(png|jpe?g|svg)$/));
-        no_images = importAll(require.context('../../../public/training_data/no/', false, /\.(png|jpe?g|svg)$/));
+
     return(
        <div className = 'data'>
            <div className = "menu" id = "menu">
@@ -23,7 +28,7 @@ export default function Data() {
                    Back
                    </Link>
                    </Button>  
-                <Button size="large" variant="contained">
+                <Button size="large" variant="contained" onClick = {train}>
                     Train
                 </Button>
             </Stack>
