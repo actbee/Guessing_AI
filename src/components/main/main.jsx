@@ -52,18 +52,7 @@ export default function Main(){
     // Wait for all promises to be resolved
     await Promise.all(filePromises).then((values) => {
         setDisplayedImages(values);
-
-        // Note: If you want to have the images be appended, use something like the following:
-        // setDisplayedImages([...displayedImages, ...values])
-
         setIsLoading(false);
-        // TODO: use recoil for keeping track of global state, 
-        // INFO HERE -> https://recoiljs.org/docs/introduction/installation
-        // e.g. 1) what images are in both "true" and "false" training sets.
-        //      2) your trained naive bayes model, or the weights of the that model.
-
-        // e.g. update recoil here by adding training data 
-        // then retrain on all training data and update recoil atom for naive bayes weights.
     })
 
   };
@@ -100,28 +89,6 @@ export default function Main(){
         }
     }
 
-    const webcamRef = useRef(null);
-
-    const image_state = {
-        file: '',
-        imagePreivewUrl: '',
-    };
-
-    const _handleImageChange = (e) => {
-        e.preventDefault();
-        let reader = new Filereader();
-        let file = e.target.files[0];
-
-        reader.onloadend = () => {
-            image_state.file = file;
-            image_state.imagePreivewUrl = reader.result;
-        }
-
-        reader.readAsDataURL (file);
-
-    }
-
-  
 
      return(
         <div className = "main">
@@ -164,11 +131,6 @@ export default function Main(){
 
         </Stack>
   
-        {/*
-            image_state.imagePreivewUrl &&
-            <img src = {image_state.imagePreivewUrl} />
-          */ }
-
         </div> 
 
        {    prediction &&
