@@ -12,7 +12,7 @@ import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
-
+import {PredictLabel} from '../naiveBayes/naiveBayes'
 
 
 const Input = styled('input')({
@@ -25,7 +25,7 @@ export default function Main(){
     const [result, setOn2] = useState(true);
     const [upclicked, setOn3] = useState(false);
     const [downclicked, setOn4] = useState(false);
-    const [displayedImages, setDisplayedImages] = useState([]);
+    const [displayedImage, setDisplayedImage] = useState('');
   
 
 
@@ -52,7 +52,7 @@ export default function Main(){
 
     // Wait for all promises to be resolved
     await Promise.all(filePromises).then((values) => {
-        setDisplayedImages(values);
+        setDisplayedImage(values);
     })
 
   };
@@ -63,16 +63,22 @@ export default function Main(){
     };
 
     const predict_click = () => {
+
+      if(displayedImage.length===1){     
        setOn(true);
        setOn3(false);
        setOn4(false);
-       if(Math.random()>0.5){
+       var res = PredictLabel(displayedImage);
+       console.log(res);
+       if( res === "yes"){
            result_change(true);
        }
        else{
         result_change(false);
        }
+      }
     };
+
     const result_change = (prob) =>{
         setOn2(prob)
     }
@@ -108,10 +114,9 @@ export default function Main(){
             <div className = "Image">
 
           <div className = "Image_body">
-              {
-            displayedImages.map(
-                (image, index) => 
-                <img width={400} alt={'user inputted'} src={image} height={400} key={index} />)
+            {
+              displayedImage.length === 0 ? <></> :
+                <img width={400} alt={'user inputted'} src={displayedImage} height={400}  />
             }
             </div>
 

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 // import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import UploadTrainingData from './upload-training-data';
 import Stack from '@mui/material/Stack';
-import {trainNaiveBayes} from '../naiveBayes/naiveBayes'
+import {TrainNaiveBayes} from '../naiveBayes/naiveBayes'
 import {useRecoilValue} from 'recoil'
 import { displayedImages_no, displayedImages_yes } from "../../store"
 
@@ -15,8 +15,8 @@ export default function Data() {
     const no_images = useRecoilValue(displayedImages_no);
 
     const train = () => {
-        trainNaiveBayes(yes_images, "yes")
-        trainNaiveBayes(no_images, "no")
+        TrainNaiveBayes(yes_images, "yes")
+        TrainNaiveBayes(no_images, "no")
     }
 
     return(

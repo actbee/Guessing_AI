@@ -1,6 +1,7 @@
-import { displayedImages_yes, displayedImages_no } from "./atoms";
+import { displayedImages_yes, displayedImages_no, classifier } from "./atoms";
 
 export{
     displayedImages_yes,
-    displayedImages_no
+    displayedImages_no,
+    classifier
 }
