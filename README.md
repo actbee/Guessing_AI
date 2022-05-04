@@ -3,7 +3,7 @@
 ## Opening the Terminal
 Mac: type "terminal" into spotlight search (usually command-space) and open the first result. If this doesn't work, see [alternatives](https://setapp.com/how-to/how-to-open-terminal-on-mac?ci=16866791938&adgroupid=137159863164&adpos=&ck=terminal%20app%20mac&targetid=kwd-299340377240&match=p&gnetwork=g&creative=592503194158&placement=&placecat=&accname=setapp&gclid=Cj0KCQjwpcOTBhCZARIsAEAYLuVWE53tYVhornpYBBdP7A6NuYHll5noeB-lvCIfEtc-181YYm3M0NYaAtqjEALw_wcB)
 
-Windows: type "terminal" into the Windows search bar and open the first result
+Windows: type "terminal" into the Windows search bar and open the first result.\\
 Download and install [Git](https://git-scm.com/download/win)
 
 ## Clone the Repo
