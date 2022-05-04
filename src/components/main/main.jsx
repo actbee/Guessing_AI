@@ -23,10 +23,11 @@ export default function Main(){
 
     const [prediction, setOn] = useState(false);
     const [result, setOn2] = useState(true);
+    const [res, setres] = useState('positive');
     const [upclicked, setOn3] = useState(false);
     const [downclicked, setOn4] = useState(false);
     const [displayedImage, setDisplayedImage] = useState([]);
-  
+    const [predicting, ispredicting] = useState(false);
 
 
     const uploadDocuments = async (files) => {
@@ -68,20 +69,24 @@ export default function Main(){
        setOn(true);
        setOn3(false);
        setOn4(false);
-       var res = PredictLabel(displayedImage);
-       console.log("ooo",res);
+       ispredicting(true);
+       PredictLabel(displayedImage, setres, ispredicting);
+       while(predicting){
+            console.log("waiting");
+       }
+       console.log("result111", res);
        if( res === "positive"){
-           result_change(true);
+           setOn2(true);
+       }
+       else if(res === null){
+         Math.round(Math.random()) === 0 ? setOn2(true) : setOn2(false);
        }
        else{
-        result_change(false);
+        setOn2(false);
        }
       }
     };
 
-    const result_change = (prob) =>{
-        setOn2(prob)
-    }
     const up_click = () => {
         setOn3(upclicked => !upclicked)
         if(downclicked){

@@ -38,7 +38,7 @@ function load_img(url){
 export function TrainNaiveBayes(imagearray, userLabel) {
 	//const [current_classifier, setclassifier] = useRecoilState(classifier);
 	if(imagearray.length>0){
-	var imageLabels = [];
+	var imageLabel = "too";
 	for (var i =0; i<imagearray.length; i++){
 		// var img = new Image();
        // var imgpath = "../../public/training_data/yes/logo512.png";
@@ -51,21 +51,30 @@ export function TrainNaiveBayes(imagearray, userLabel) {
 					console.log(err);
 				}
 				else{
-				  imageLabels.push(String(results[0].className));
-				  console.log("rr1", results[0]);
+				  imageLabel = results[0].className;
+				  console.log("type of",typeof imageLabel);
+				  console.log("training", imageLabel);
 				}
 			});
+		current_classifier.learn(imageLabel, userLabel).then(value =>{
+			console.log("success");
+		}, reason =>{
+			console.log("failed");
+		});
 	}
-    console.log("t1", imageLabels);
-    current_classifier.learn(imageLabels, userLabel);
+/*
+    current_classifier.learn(imageLabel, userLabel).then(()=>{
+		console.log("success");
+	});
+*/
 	// setclassifier(current_classifier);
    }
 }
 
 // Takes in objects in image, outputs user label
-export function PredictLabel(image) {
+export function PredictLabel(image, setres, ispredicting) {
 	//const current_classifier = useRecoilValue(classifier)
-	var imageLabel;
+	var imageLabel = "home";
 	//var img = await load_img(image[0]);
     var img = load_img(image[0]);
 	processing_classifier.predict(img, 
@@ -74,16 +83,18 @@ export function PredictLabel(image) {
 				console.log(err);
 			}
 			else{
-			  imageLabel = String(results[0].className);
+			  imageLabel = results[0].className;
 			  console.log("label",imageLabel);
 			}
 		});
-    var predict;
 	console.log("type of",typeof imageLabel);
-    current_classifier.categorize("daisy").then(res =>{
+    current_classifier.categorize(imageLabel).then(res =>{
 		console.log("predict", res);
-        predict = res;
-		return predict;
+        setres(res)
+		ispredicting(false);
+	}, reason =>{
+		console.log("failed");
+		ispredicting(false);
 	});
     
 }
