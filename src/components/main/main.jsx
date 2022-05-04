@@ -13,7 +13,7 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import {PredictLabel} from '../naiveBayes/naiveBayes'
-
+import { uploadDocuments } from "../image-upload/image-uploader";
 
 const Input = styled('input')({
     display: 'none',
@@ -21,82 +21,55 @@ const Input = styled('input')({
 
 export default function Main(){
 
-    const [prediction, setOn] = useState(false);
-    const [result, setOn2] = useState(true);
-    const [res, setres] = useState('positive');
-    const [upclicked, setOn3] = useState(false);
-    const [downclicked, setOn4] = useState(false);
+    const [prediction, setprediction] = useState(false);
+    const [result, setresult] = useState(true);
+    const [reslabel, setreslabel] = useState('positive');
+    const [upclicked, setup] = useState(false);
+    const [downclicked, setdown] = useState(false);
     const [displayedImage, setDisplayedImage] = useState([]);
     const [predicting, ispredicting] = useState(false);
 
 
-    const uploadDocuments = async (files) => {
-
-    const filePromises = files.map((file) => {
-      // Return a promise per file
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = async () => {
-          try {
-            // Resolve the promise with the response value
-            resolve(reader.result);
-          } catch (err) {
-            reject(err);
-          }
-        };
-        reader.onerror = (error) => {
-          reject(error);
-        };
-        reader.readAsDataURL(file);
-      });
-    });
-
-    // Wait for all promises to be resolved
-    await Promise.all(filePromises).then((values) => {
-        setDisplayedImage(values);
-    })
-
-  };
 
     const updateImages = (newImages) => {        
-        const images = uploadDocuments(Object.values(newImages.target.files));
+        const images = uploadDocuments(Object.values(newImages.target.files), setDisplayedImage, "prediction");
         console.log(images);
     };
 
     const predict_click = () => {
 
       if(displayedImage.length===1){     
-       setOn(true);
-       setOn3(false);
-       setOn4(false);
+       setprediction(true);
+       setup(false);
+       setdown(false);
        ispredicting(true);
-       PredictLabel(displayedImage, setres, ispredicting);
+       PredictLabel(displayedImage, setreslabel, ispredicting);
        while(predicting){
             console.log("waiting");
        }
-       console.log("result111", res);
-       if( res === "positive"){
-           setOn2(true);
+       console.log("result111", reslabel);
+       if( reslabel === "positive"){
+           setresult(true);
        }
-       else if(res === null){
-         Math.round(Math.random()) === 0 ? setOn2(true) : setOn2(false);
+       else if(reslabel === null){
+         Math.round(Math.random()) === 0 ? setresult(true) : setresult(false);
        }
        else{
-        setOn2(false);
+        setresult(false);
        }
       }
     };
 
     const up_click = () => {
-        setOn3(upclicked => !upclicked)
+        setup(upclicked => !upclicked)
         if(downclicked){
-            setOn4(false);
+            setdown(false);
         }
     }
     const down_click = () => {
-        setOn4(down_clicked => !downclicked)
+        setdown(down_clicked => !downclicked)
         if(upclicked){
-            setOn3(false);
+            setup(false);
         }
     }
 
