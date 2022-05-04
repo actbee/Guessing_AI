@@ -5,18 +5,19 @@ import { Link } from "react-router-dom";
 import UploadTrainingData from './upload-training-data';
 import Stack from '@mui/material/Stack';
 import {TrainNaiveBayes} from '../naiveBayes/naiveBayes'
-import {useRecoilValue} from 'recoil'
-import { displayedImages_no, displayedImages_yes } from "../../store"
+import {useRecoilValue, useRecoilState } from 'recoil'
+import { displayedImages_no, displayedImages_yes, classifier } from "../../store"
 
 
 export default function Data() {
 
     const yes_images = useRecoilValue(displayedImages_yes);
     const no_images = useRecoilValue(displayedImages_no);
+    const [_naiveBayesClassifier, setNaiveBayesClassifier] = useRecoilState(classifier);
+
 
     const train = () => {
-        TrainNaiveBayes(yes_images, 'positive')
-        TrainNaiveBayes(no_images, 'negative')
+        TrainNaiveBayes(yes_images, no_images, setNaiveBayesClassifier);
     }
 
     return(

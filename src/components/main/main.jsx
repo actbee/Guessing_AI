@@ -14,6 +14,8 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbDownOffAltIcon from '@mui/icons-material/ThumbDownOffAlt';
 import {PredictLabel} from '../naiveBayes/naiveBayes'
 import { uploadDocuments } from "../image-upload/image-uploader";
+import {useRecoilValue, useRecoilState } from 'recoil'
+import { displayedImages_no, displayedImages_yes, classifier } from "../../store"
 
 const Input = styled('input')({
     display: 'none',
@@ -28,6 +30,7 @@ export default function Main(){
     const [downclicked, setdown] = useState(false);
     const [displayedImage, setDisplayedImage] = useState([]);
     const [predicting, ispredicting] = useState(false);
+    const naiveBayesClassifier = useRecoilValue(classifier);
 
 
 
@@ -39,24 +42,11 @@ export default function Main(){
     const predict_click = () => {
 
       if(displayedImage.length===1){     
-       setprediction(true);
-       setup(false);
-       setdown(false);
-       ispredicting(true);
-       PredictLabel(displayedImage, setreslabel, ispredicting);
-       while(predicting){
-            console.log("waiting");
-       }
-       console.log("result111", reslabel);
-       if( reslabel === "positive"){
-           setresult(true);
-       }
-       else if(reslabel === null){
-         Math.round(Math.random()) === 0 ? setresult(true) : setresult(false);
-       }
-       else{
-        setresult(false);
-       }
+        setprediction(true);
+        setup(false);
+        setdown(false);
+        ispredicting(true);
+        PredictLabel(displayedImage, setresult,naiveBayesClassifier, ispredicting);
       }
     };
 
@@ -108,9 +98,9 @@ export default function Main(){
 
        
         <Input accept="image/*" id="icon-button-file" type="file" />
-        <IconButton color="primary" aria-label="upload picture" component="span">
+        {/* <IconButton color="primary" aria-label="upload picture" component="span">
           <PhotoCamera size="large"/>
-        </IconButton>
+        </IconButton> */}
 
         </Stack>
   
@@ -128,7 +118,7 @@ export default function Main(){
                <div className = "judge">
                <Stack direction="row" alignItems="center" spacing={15}>
 
-               <IconButton color="primary" aria-label="agree" component="span">
+               {/* <IconButton color="primary" aria-label="agree" component="span">
                    {
                        upclicked? <ThumbUpAltIcon  onClick = {up_click} sx = {{color: "orange", fontSize: 50}}/>
                        : <ThumbUpOffAltIcon onClick = {up_click} sx = {{color: "orange", fontSize: 50}}/>
@@ -140,7 +130,7 @@ export default function Main(){
                        downclicked? <ThumbDownAltIcon onClick = {down_click} sx = {{color: "orange", fontSize: 50}}/> 
                        : <ThumbDownOffAltIcon onClick = {down_click} sx = {{color: "orange", fontSize: 50}}/>
                    }
-               </IconButton>
+               </IconButton> */}
 
                    </Stack>
                    </div>

@@ -13,6 +13,7 @@ import "./training_data.css";
 import { displayedImages_yes, displayedImages_no} from '../../store';
 import {useRecoilState, useRecoilValue, useSetRecoilState} from "recoil";
 import { uploadDocuments } from '../image-upload/image-uploader';
+import { classifier } from '../../store';
 
 
 const UploadTrainingData = (props) => {
@@ -55,9 +56,6 @@ const Input = styled('input')({
                                 <img width={150} alt={'user inputted'} src={image} height={150} key={index} />)
                     }
                     </div>
-                {/* TODO: we could make this button more friendly looking, 
-                the commented out button below is pretty solid if you wanna go with that. */}
-           
 
                 <div className = "add_button" >
                 <Input id = {props.inputid} accept="image/*" multiple type="file" onChange={updateImages} />
