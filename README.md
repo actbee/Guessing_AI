@@ -13,9 +13,11 @@ git clone https://github.com/actbee/Guessing_AI.git
 ```
 
 ## Install Dependencies
-Run the following command. This installation may take a bit.
+Run the following commands. This installation may take a bit.
 ```
 npm install
+npm install ml5
+npm install bayes
 ```
 
 ## Start the Local Server
