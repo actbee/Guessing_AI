@@ -1,4 +1,11 @@
-# Getting Started with Create React App
+# Guessing AI
+
+## About
+This is one of a series AI prototypes built to help teach kids understand the basic concepts in AI.
+By changing the training data here, kids are able to observe the changing AI prediction result and understand how AI works intuitively.
+Test the demo online here: https://guessingai.onrender.com
+If you want to run it locally, please follow the instructions below.
+
 
 ## Opening the Terminal
 Mac: type "terminal" into spotlight search (usually command-space) and open the first result. If this doesn't work, see [alternatives](https://setapp.com/how-to/how-to-open-terminal-on-mac?ci=16866791938&adgroupid=137159863164&adpos=&ck=terminal%20app%20mac&targetid=kwd-299340377240&match=p&gnetwork=g&creative=592503194158&placement=&placecat=&accname=setapp&gclid=Cj0KCQjwpcOTBhCZARIsAEAYLuVWE53tYVhornpYBBdP7A6NuYHll5noeB-lvCIfEtc-181YYm3M0NYaAtqjEALw_wcB)
